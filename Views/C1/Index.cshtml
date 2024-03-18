@@ -1,0 +1,42 @@
+@{
+    ViewData["Title"] = "C1";
+}
+
+<h1>Index</h1>
+
+<div class="container col-6 mt-5">
+    <form asp-action="Index" method="post">
+        <label for="nome-clientes" class="control-label">Clientes</label>
+        <select id="nome-clientes" name="idCliente" class="form-control" asp-items="ViewBag.Clientes" onchange="this.form.submit()">
+            <option disabled selected>Selecione um cliente</option>
+        </select>
+    </form>
+</div>
+
+<div class="container col-10 mt-5 mb-5">
+    <h3 class="text-center">Items associados</h3>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>ID do Item</td>
+                <th>Item 1</td>
+                <th>Item 2</td>
+                <th>Texto</td>
+                <th>ID do Tipo</td>
+            </tr>
+        </thead>
+        <tbody>
+            @if(ViewBag.ListaItems != null) {
+                @foreach(var item in @ViewBag.ListaItems){
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Item1</td>
+                        <td>@item.Item2</td>
+                        <td>@item.Texto</td>
+                        <td>@item.TipoId</td>
+                    </tr>
+                }
+            } 
+        </tbody>
+    </table>
+</div>
