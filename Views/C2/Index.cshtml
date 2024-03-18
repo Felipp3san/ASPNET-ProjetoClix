@@ -1,0 +1,25 @@
+@{
+    ViewData["Title"] = "C2";
+}
+
+<h1>Index</h1>
+
+<div class="container col-6 mt-5">
+    <form asp-action="Index" method="post">
+        <label for="txtNomeCliente" class="control-label">Nome do Cliente</label>
+        @Html.TextBox("txtNomeCliente")
+        <button type="submit">Enviar</button>
+    </form>
+</div>
+
+<div>
+    <p>
+        @ViewBag.Nome
+    </p>
+</div>
+
+<div class="container col-6 mt-5">
+        <select name="idCliente" class="form-control" asp-items="ViewBag.NomesClientes">
+            <option disabled selected>Selecione um cliente</option>
+        </select>
+</div>

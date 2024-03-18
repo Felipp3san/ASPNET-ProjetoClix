@@ -1,0 +1,28 @@
+@model IEnumerable<Cliente>
+
+
+<div class="container mt-5">
+    <h1>Clientes</h1>
+    <a asp-action="Adicionar">Adicionar Novo Cliente</a>
+</div>
+
+<div class="container">
+    <table class="table">
+        <thead>
+
+        </thead>
+            <th>Id Cliente</th>
+            <th>Nome Cliente</th>
+            <th>Referencia</th>
+            <th>Ações</th>
+        <tbody>
+            @foreach(var cliente in Model){
+            <tr>
+                <td>@cliente.Id</td>
+                <td>@cliente.NomeCliente</td>
+                <td>@cliente.Referencia</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
