@@ -8,11 +8,11 @@ namespace AspNet_ProjetoClix.Models
         [Key]
         public int Id { get; set; }
 
+        [Required(ErrorMessage = "O nome do cliente é obrigatório.")]
         [DisplayName("Nome Cliente")]
-        [StringLength(80, ErrorMessage="Nome Inválido")]
+        [RegularExpression(@"^[A-Za-z\s]{1,40}$", ErrorMessage ="O nome deve conter apenas letras.")]
         public string NomeCliente { get; set; } = default!;
 
-        [StringLength(80, ErrorMessage="Referência Inválida")]
         public string? Referencia { get; set; }
     }
 }

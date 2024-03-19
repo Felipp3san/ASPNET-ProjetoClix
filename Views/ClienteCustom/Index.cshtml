@@ -2,12 +2,12 @@
 
 
 <div class="container mt-5">
-    <h1>Clientes</h1>
+    <h1 class="mb-3">Clientes</h1>
     <a asp-action="Adicionar">Adicionar Novo Cliente</a>
 </div>
 
-<div class="container">
-    <table class="table">
+<div class="container mt-3">
+    <table class="table align-middle">
         <thead>
 
         </thead>
@@ -21,6 +21,10 @@
                 <td>@cliente.Id</td>
                 <td>@cliente.NomeCliente</td>
                 <td>@cliente.Referencia</td>
+                <td>
+                    <a class="btn btn-success" asp-action="Editar" asp-route-id="@cliente.Id">Editar</a> 
+                    <a class="btn btn-danger" asp-action="Eliminar" asp-route-id="@cliente.Id">Eliminar</a>
+                </td>
             </tr>
             }
         </tbody>

@@ -1,19 +1,18 @@
 @model AspNet_ProjetoClix.Models.Cliente
 
 <div class="container mt-5">
-    <h1>Adicionar Cliente</h1>
+    <h1>Editar Cliente</h1>
 </div>
 
 <div class="container col-6 m-0">
-        <form asp-action="Adicionar" method="POST">
-        <label class="control-label" asp-for="NomeCliente"></label> 
+    <form asp-action="Adicionar" method="POST">
+        <label asp-for="NomeCliente"></label> 
         <input class="form-control" asp-for="NomeCliente" type="text">
-        <span asp-validation-for="NomeCliente" class="text-danger"></span>
         <br>
-        <label class="control-label" asp-for="Referencia"></label>
+        <label asp-for="Referencia"></label>
         <input class="form-control" asp-for="Referencia">
         <div class="mt-3 gap-2">
-            <button class="btn btn-primary" type="submit">Adicionar</button>
+            <button class="btn btn-success" type="submit">Editar</button>
             <a class="btn btn-secondary" asp-action="Index">Retornar</a>
         </div>
     </form>

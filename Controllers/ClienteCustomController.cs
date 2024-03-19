@@ -2,6 +2,7 @@ using AspNet_ProjetoClix.Data;
 using AspNet_ProjetoClix.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace AspNet_ProjetoClix.Controllers;
 
@@ -19,21 +20,47 @@ public class ClienteCustomController : Controller
         return View(await _context.Clientes.ToListAsync());
     }
 
-    public async Task<IActionResult> Adicionar()
+    public IActionResult Adicionar()
     {
         return View();
     }
 
     [HttpPost]
-    public async Task<IActionResult> Adicionar(string nomeCliente, string referenciaCliente)
+    public async Task<IActionResult> Adicionar(Cliente cliente)
     {
-        var cliente = new Cliente
-        {
-            NomeCliente = nomeCliente,
-            Referencia = referenciaCliente
-        };
-
+        if(!ModelState.IsValid){
+            return View(cliente);
+        }
+        
         _context.Add(cliente);
+        await _context.SaveChangesAsync();
+        
+        return RedirectToAction("Index");
+    }
+
+    public async Task<IActionResult> Editar(int id)
+    {
+        return View(await _context.Clientes.FindAsync(id));
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Editar(Cliente cliente)
+    {
+        _context.Clientes.Update(cliente);
+        await _context.SaveChangesAsync();
+
+        return RedirectToAction("Index");
+    }
+
+    public async Task<IActionResult> Eliminar(int id)
+    {
+        return View(await _context.Clientes.FindAsync(id));
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Eliminar(Cliente cliente)
+    {
+        _context.Clientes.Remove(cliente);
         await _context.SaveChangesAsync();
 
         return RedirectToAction("Index");
