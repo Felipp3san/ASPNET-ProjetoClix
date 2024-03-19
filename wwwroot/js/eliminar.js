@@ -6,16 +6,15 @@ const modal = document.querySelector(".modal");
 
 let w = window.innerWidth;
 let h = window.innerHeight;
+let positionInfo;
 
 const openModal = () => {
 
-    w = window.innerWidth;
-    h = window.innerHeight;
-    
     modal.classList.remove("hidden");
     overlay.classList.remove("hidden");
 
-    modal.style.transform = `translate(${(w - 500) / 2}px, ${(h - 200) / 2}px`;
+    atualizarTamanhoWindowModal();
+    modal.style.transform = `translate(${(w - positionInfo.width) / 2}px, ${(h - positionInfo.height) / 2}px`;
 }
 
 const closeModal = () => {
@@ -37,22 +36,18 @@ modal.addEventListener("mouseup", mouseUp);
 
 function mouseDown(e) {
 
+    atualizarTamanhoWindowModal();
+
     isDragging = true;
     modal.style.cursor = "move";
-    
-    w = window.innerWidth;
-    h = window.innerHeight;
 
     startX = e.clientX;
     startY = e.clientY;
 
-    let positionInfo = modal.getBoundingClientRect();
-    let modalTop = positionInfo.top;
-    let modalLeft = positionInfo.left;
-
-    modalX = modalLeft || 0;
-    modalY = modalTop || 0;
+    modalX = parseFloat(positionInfo.left);
+    modalY = parseFloat(positionInfo.top);
 }
+
 
 function mouseMove(e){
 
@@ -68,9 +63,17 @@ function mouseMove(e){
         this.style.transform = `translate(${newX}px, ${newY}px)`
     }
 }
+
     
 function mouseUp(){
-
+    
     isDragging = false;
     modal.style.cursor = "unset";
+}
+
+
+function atualizarTamanhoWindowModal(){
+    positionInfo = modal.getBoundingClientRect();
+    w = window.innerWidth;
+    h = window.innerHeight;
 }
