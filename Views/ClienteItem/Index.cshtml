@@ -1,0 +1,71 @@
+@model AspNet_ProjetoClix.ViewModel.ClientesItems
+
+@{
+    ViewData["Title"] = "Cliente Item";
+}
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-6">
+            <h1>Clientes</h1>
+            <hr>
+            <form asp-action="Index" method="GET">
+                <label class="input-label" for="clienteId">Nome cliente</label> 
+                <select class="form-control" name="clienteId" asp-items="@Model.Clientes" onchange="this.form.submit()">
+                    <option value="0" disabled selected>Selecione um cliente</option>
+                </select>
+            </form>
+        </div>
+    </div>
+    
+    <div class="row mt-4">
+        <div class="col">
+        <h3>Items do cliente</h3>
+            @if (Model.Items != null){
+
+                <div class="mb-3">
+                    <a class="btn btn-primary" asp-action="Adicionar" asp-route-clienteId='@ViewData["ClienteId"]'>Adicionar novo item</a> 
+                </div>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Item1</th>
+                                <th>Item2</th>
+                                <th>Texto</th>
+                                <th>TipoId</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(var item in Model.Items){
+                                <tr>
+                                    <td>
+                                        @item.Item1
+                                    </td>
+                                    <td>
+                                        @item.Item2
+                                    </td>
+                                    <td>
+                                        @item.Texto
+                                    </td>
+                                    <td>
+                                        @item.TipoId
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-success" asp-action="Editar" asp-route-itemId="@item.Id">Editar</a> 
+                                        <a class="btn btn-danger" asp-action="Eliminar" asp-route-itemId="@item.Id">Eliminar</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+            }
+            else {
+                <p>A lista está vazia.</p>
+            }
+        </div>
+    </div>
+</div>
+
