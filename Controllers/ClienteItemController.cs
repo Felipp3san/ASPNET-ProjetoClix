@@ -27,6 +27,7 @@ namespace AspNet_ProjetoClix.Controllers
             if(clienteId != null)
             {
                 clientesItems.Items = await _context.Items.Where(e => e.ClienteId == clienteId).ToListAsync();
+                clientesItems.Tipos = await _context.Tipos.ToListAsync();
 
                 // O ciclo abaixo serve para manter o cliente selecionado na selectlist
                 foreach (var cliente in clientesItems.Clientes)
@@ -68,7 +69,11 @@ namespace AspNet_ProjetoClix.Controllers
         {
             var item = await _context.Items.FindAsync(itemId);
 
-            ViewData["ClienteId"] = itemId;
+            if (item != null)
+            {
+                ViewData["ClienteId"] = item.ClienteId;
+            }
+
             ViewData["ListaTipos"] = new SelectList(await _context.Tipos.ToListAsync(), "Id", "Descricao");
             
             return View(item);

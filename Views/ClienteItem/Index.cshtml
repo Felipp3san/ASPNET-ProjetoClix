@@ -31,10 +31,10 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Item1</th>
-                                <th>Item2</th>
+                                <th>Item 1</th>
+                                <th>Item 2</th>
                                 <th>Texto</th>
-                                <th>TipoId</th>
+                                <th>Tipo</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
@@ -51,7 +51,11 @@
                                         @item.Texto
                                     </td>
                                     <td>
-                                        @item.TipoId
+                                        @foreach (var tipo in Model.Tipos){
+                                            if(item.TipoId == tipo.Id){
+                                                @tipo.Descricao
+                                            }
+                                        }
                                     </td>
                                     <td>
                                         <a class="btn btn-success" asp-action="Editar" asp-route-itemId="@item.Id">Editar</a> 
