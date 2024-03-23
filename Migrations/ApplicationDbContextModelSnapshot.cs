@@ -32,12 +32,10 @@ namespace AspNet_ProjetoClix.Migrations
 
                     b.Property<string>("NomeCliente")
                         .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Referencia")
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
