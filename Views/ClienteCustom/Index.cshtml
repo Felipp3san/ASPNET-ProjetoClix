@@ -1,32 +1,38 @@
 @model IEnumerable<Cliente>
 
 
-<div class="container mt-5">
-    <h1 class="mb-3">Clientes</h1>
-    <a asp-action="Adicionar">Adicionar Novo Cliente</a>
-</div>
+<div class="container">
+    <div class="row">
+            <h1>Clientes</h1>
+            <hr>
+    </div>
+    <div class="row mt-2">
+        <div class="col-6">
+            <a class="btn btn-primary" asp-action="Adicionar">Adicionar Novo Cliente</a>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <table class="table align-middle">
+            <thead>
 
-<div class="container mt-3">
-    <table class="table align-middle">
-        <thead>
-
-        </thead>
-            <th>Id Cliente</th>
-            <th>Nome Cliente</th>
-            <th>Referencia</th>
-            <th>Ações</th>
-        <tbody>
-            @foreach(var cliente in Model){
-            <tr>
-                <td>@cliente.Id</td>
-                <td>@cliente.NomeCliente</td>
-                <td>@cliente.Referencia</td>
-                <td>
-                    <a class="btn btn-success" asp-action="Editar" asp-route-id="@cliente.Id">Editar</a> 
-                    <a class="btn btn-danger" asp-action="Eliminar" asp-route-id="@cliente.Id">Eliminar</a>
-                </td>
-            </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+                <th>Id Cliente</th>
+                <th>Nome Cliente</th>
+                <th>Referencia</th>
+                <th>Ações</th>
+            <tbody>
+                @foreach(var cliente in Model){
+                <tr>
+                    <td>@cliente.Id</td>
+                    <td>@cliente.NomeCliente</td>
+                    <td>@cliente.Referencia</td>
+                    <td>
+                        <a class="btn btn-success" asp-action="Editar" asp-route-id="@cliente.Id">Editar</a> 
+                        <a class="btn btn-danger" asp-action="Eliminar" asp-route-id="@cliente.Id">Eliminar</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>

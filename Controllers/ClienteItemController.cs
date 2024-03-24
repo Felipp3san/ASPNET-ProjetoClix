@@ -65,9 +65,9 @@ namespace AspNet_ProjetoClix.Controllers
             return RedirectToAction("Index", new { clienteId = item.ClienteId});
         }
 
-        public async Task<IActionResult> Editar(int itemId)
+        public async Task<IActionResult> Editar(int? id)
         {
-            var item = await _context.Items.FindAsync(itemId);
+            var item = await _context.Items.FindAsync(id);
 
             if (item != null)
             {
@@ -93,9 +93,9 @@ namespace AspNet_ProjetoClix.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> Eliminar(int itemId)
+        public async Task<IActionResult> Eliminar(int? id)
         {
-            var item = await _context.Items.FindAsync(itemId);
+            var item = await _context.Items.FindAsync(id);
 
             if(item != null) 
             {
@@ -112,10 +112,10 @@ namespace AspNet_ProjetoClix.Controllers
             return View(item);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> EliminarPost(int itemId)
+        [HttpPost, ActionName("Eliminar")]
+        public async Task<IActionResult> EliminarPost(int id)
         {
-            var item = await _context.Items.FindAsync(itemId);
+            var item = await _context.Items.FindAsync(id);
 
             if(item != null)
             {

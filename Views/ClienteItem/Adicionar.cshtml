@@ -15,18 +15,18 @@
     <div class="row">
         <div class="col-6">
             <form asp-action="Adicionar">
-                <label class="input-label" asp-for="ClienteId"></label>
+                <label class="form-label" asp-for="ClienteId"></label>
                 <input class="form-control" asp-for="ClienteId" value='@ViewData["ClienteId"]' readonly>
-                <label class="input-label" asp-for="Item1"></label>
+                <label class="form-label mt-3" asp-for="Item1"></label>
                 <input class="form-control" asp-for="Item1">
-                <label class="input-label" asp-for="Item2"></label>
+                <label class="form-label mt-3" asp-for="Item2"></label>
                 <input class="form-control" asp-for="Item2">
-                <label class="input-label" asp-for="Texto"></label>
+                <label class="form-label mt-3" asp-for="Texto"></label>
                 <input class="form-control" asp-for="Texto">
-                <label class="input-label" asp-for="TipoId"></label>
-                <select class="form-control" asp-for="TipoId" asp-items="ViewBag.ListaTipos"></select>
+                <label class="form-label mt-3" asp-for="TipoId"></label>
+                <select class="form-control mb-3" asp-for="TipoId" asp-items="ViewBag.ListaTipos"></select>
 
-                <div class="mt-3">
+                <div class="d-flex gap-2">
                     <button class="btn btn-primary" type="submit">Adicionar</button>
                     <a class="btn btn-secondary" asp-action="Index" asp-route-clienteId='@ViewData["ClienteId"]'>Retornar</a>
                 </div> 

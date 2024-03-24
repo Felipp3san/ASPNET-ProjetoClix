@@ -5,26 +5,28 @@
 }
 
 <div class="container">
-    <h1>Eliminar Item</h1>
-    <hr>
     <div class="row">
-        <div class="col-6"></div>
+        <div class="col-6">
+            <h1>Eliminar Item</h1>
+            <hr>
+        </div>
     </div>
     <div class="row">
         <div class="col-6">
-            <form asp-action="EliminarPost">
-                <label class="input-label" asp-for="Id"></label>
-                <input class="form-control" name="itemId" asp-for="Id" readonly>
-                <label class="input-label" asp-for="Item1"></label>
+                <label class="form-label" asp-for="Id"></label>
+                <input class="form-control" asp-for="Id" readonly>
+                <label class="form-label mt-3" asp-for="Item1"></label>
                 <input class="form-control" asp-for="Item1" readonly>
-                <label class="input-label" asp-for="Item2"></label>
+                <label class="form-label mt-3" asp-for="Item2"></label>
                 <input class="form-control" asp-for="Item2" readonly>
-                <label class="input-label" asp-for="Texto"></label>
+                <label class="form-label mt-3" asp-for="Texto"></label>
                 <input class="form-control" asp-for="Texto" readonly>
-                <label class="input-label" for="tipo">Tipo</label>
-                <input class="form-control" name="tipo" value='@ViewData["Tipo"]' readonly>
+                <label class="form-label mt-3" for="tipo">Tipo</label>
+                <input id="tipo" class="form-control mb-3" name="tipo" value='@ViewData["Tipo"]' readonly>
 
-                <div class="d-flex mt-3 gap-2">
+            <form asp-action="Eliminar">
+                <input type="hidden" asp-for="Id">
+                <div class="d-flex gap-2">
                     <a id="btnModal" class="btn btn-danger">Eliminar</button>
                     <a class="btn btn-secondary" asp-action="Index" asp-route-clienteId='@ViewData["ClienteId"]'>Retornar</a>
                 </div> 

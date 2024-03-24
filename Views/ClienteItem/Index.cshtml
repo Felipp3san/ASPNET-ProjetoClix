@@ -1,75 +1,80 @@
 @model AspNet_ProjetoClix.ViewModel.ClientesItems
 
 @{
-    ViewData["Title"] = "Cliente Item";
+    ViewData["Title"] = "Itens";
 }
 
 <div class="container">
 
     <div class="row">
-        <div class="col-6">
-            <h1>Clientes</h1>
-            <hr>
+        <h1>Itens</h1>
+        <hr>
+        <div class="col-4">
             <form asp-action="Index" method="GET">
-                <label class="input-label" for="clienteId">Nome cliente</label> 
-                <select class="form-control" name="clienteId" asp-items="@Model.Clientes" onchange="this.form.submit()">
+                <label class="form-label" for="clienteId">Nome cliente</label>
+                <select id="clienteId" class="form-control" name="clienteId" asp-items="@Model.Clientes" onchange="this.form.submit()">
                     <option value="0" disabled selected>Selecione um cliente</option>
                 </select>
             </form>
         </div>
     </div>
-    
+
     <div class="row mt-4">
         <div class="col">
-        <h3>Items do cliente</h3>
-            @if (Model.Items != null){
-
+            <h3>Itens do cliente</h3>
+            @if (Model.Items != null)
+            {
                 <div class="mb-3">
-                    <a class="btn btn-primary" asp-action="Adicionar" asp-route-clienteId='@ViewData["ClienteId"]'>Adicionar novo item</a> 
+                    <a class="btn btn-primary" asp-action="Adicionar" asp-route-clienteId='@ViewData["ClienteId"]'>
+                        Adicionar novo item
+                    </a>
                 </div>
 
-                    <table class="table">
-                        <thead>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Item 1</th>
+                            <th>Item 2</th>
+                            <th>Texto</th>
+                            <th>Tipo</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Items)
+                        {
                             <tr>
-                                <th>Item 1</th>
-                                <th>Item 2</th>
-                                <th>Texto</th>
-                                <th>Tipo</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach(var item in Model.Items){
-                                <tr>
-                                    <td>
-                                        @item.Item1
-                                    </td>
-                                    <td>
-                                        @item.Item2
-                                    </td>
-                                    <td>
-                                        @item.Texto
-                                    </td>
-                                    <td>
-                                        @foreach (var tipo in Model.Tipos){
-                                            if(item.TipoId == tipo.Id){
-                                                @tipo.Descricao
-                                            }
+                                <td>
+                                    @item.Item1
+                                </td>
+                                <td>
+                                    @item.Item2
+                                </td>
+                                <td>
+                                    @item.Texto
+                                </td>
+                                <td>
+                                    @foreach (var tipo in Model.Tipos)
+                                    {
+                                        if (item.TipoId == tipo.Id)
+                                        {
+                                            @tipo.Descricao
                                         }
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-success" asp-action="Editar" asp-route-itemId="@item.Id">Editar</a> 
-                                        <a class="btn btn-danger" asp-action="Eliminar" asp-route-itemId="@item.Id">Eliminar</a>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+                                    }
+                                </td>
+                                <td>
+                                    <a class="btn btn-success" asp-action="Editar" asp-route-id="@item.Id">Editar</a>
+                                    <a class="btn btn-danger" asp-action="Eliminar" asp-route-id="@item.Id">Eliminar</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             }
-            else {
+            else
+            {
                 <p>A lista está vazia.</p>
             }
         </div>
     </div>
 </div>
-

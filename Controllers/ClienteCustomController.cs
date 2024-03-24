@@ -52,16 +52,21 @@ public class ClienteCustomController : Controller
         return RedirectToAction("Index");
     }
 
-    public async Task<IActionResult> Eliminar(int id)
+    public async Task<IActionResult> Eliminar(int? id)
     {
         return View(await _context.Clientes.FindAsync(id));
     }
 
-    [HttpPost]
-    public async Task<IActionResult> Eliminar(Cliente cliente)
+    [HttpPost, ActionName("Eliminar")]
+    public async Task<IActionResult> EliminarPost(int id)
     {
-        _context.Clientes.Remove(cliente);
-        await _context.SaveChangesAsync();
+        var cliente = await _context.Clientes.FindAsync(id);
+
+        if (cliente != null)
+        {
+            _context.Clientes.Remove(cliente);
+            await _context.SaveChangesAsync();
+        }
 
         return RedirectToAction("Index");
     }
