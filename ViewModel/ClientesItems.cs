@@ -5,8 +5,8 @@ namespace AspNet_ProjetoClix.ViewModel
 {
     public class ClientesItems
     {
-        public SelectList Clientes { get; set; } = default!;
-        public ICollection<Item> Items { get; set; } = default!;    
-        public ICollection<Tipo> Tipos { get; set; } = default!; 
+        public SelectList? Clientes { get; set; }
+        public ICollection<Item>? Items { get; set; }    
+        public ICollection<Tipo>? Tipos { get; set; } 
     }
 }
