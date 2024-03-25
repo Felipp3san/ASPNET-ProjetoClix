@@ -17,58 +17,46 @@ public class ClienteCustomController : Controller
 
     public async Task<IActionResult> Index(string ordenarPor, string? nomeCliente)
     {
-        ViewData["NomeCliente"] = nomeCliente;        
+        ViewData["NomeCliente"] = nomeCliente;
 
-        switch(ordenarPor)
+        var query = _context.Clientes.AsQueryable();
+
+        if (!string.IsNullOrEmpty(nomeCliente))
+        {
+            query = query.Where(e => e.NomeCliente.Contains(nomeCliente));
+        }
+
+        switch (ordenarPor)
         {
             case "Id":
-                ViewBag.ordenarPor = "Id";
-
-                if(nomeCliente != null) 
-                    return View(await _context.Clientes.Where(e => e.NomeCliente.Contains(nomeCliente)).OrderBy(e => e.Id).ToListAsync());
-                else
-                    return View(await _context.Clientes.OrderBy(e => e.Id).ToListAsync());
+                ViewData["OrdenarPor"] = "Id"; 
+                query = query.OrderBy(e => e.Id);
+                break;
             case "IdDesc":
-                ViewBag.ordenarPor = "IdDesc";
-
-                if(nomeCliente != null) 
-                    return View(await _context.Clientes.Where(e => e.NomeCliente.Contains(nomeCliente)).OrderByDescending(e => e.Id).ToListAsync());
-                else
-                    return View(await _context.Clientes.OrderByDescending(e => e.Id).ToListAsync());
+                ViewData["OrdenarPor"] = "IdDesc"; 
+                query = query.OrderByDescending(e => e.Id);
+                break;
             case "Nome":
-                ViewBag.ordenarPor = "Nome";
-
-                if(nomeCliente != null) 
-                    return View(await _context.Clientes.Where(e => e.NomeCliente.Contains(nomeCliente)).OrderBy(e => e.NomeCliente).ToListAsync());
-                else
-                    return View(await _context.Clientes.OrderBy(e => e.NomeCliente).ToListAsync());
+                ViewData["OrdenarPor"] = "Nome"; 
+                query = query.OrderBy(e => e.NomeCliente);
+                break;
             case "NomeDesc":
-                ViewBag.ordenarPor = "NomeDesc";
-
-                if(nomeCliente != null) 
-                    return View(await _context.Clientes.Where(e => e.NomeCliente.Contains(nomeCliente)).OrderByDescending(e => e.NomeCliente).ToListAsync());
-                else
-                    return View(await _context.Clientes.OrderByDescending(e => e.NomeCliente).ToListAsync());
+                ViewData["OrdenarPor"] = "NomeDesc"; 
+                query = query.OrderByDescending(e => e.NomeCliente);
+                break;
             case "Referencia":
-                ViewBag.ordenarPor = "Referencia";
-
-                if(nomeCliente != null) 
-                    return View(await _context.Clientes.Where(e => e.NomeCliente.Contains(nomeCliente)).OrderBy(e => e.Referencia).ToListAsync());
-                else
-                    return View(await _context.Clientes.OrderBy(e => e.Referencia).ToListAsync());
+                ViewData["OrdenarPor"] = "Referencia"; 
+                query = query.OrderBy(e => e.Referencia);
+                break;
             case "ReferenciaDesc":
-                ViewBag.ordenarPor = "ReferenciaDesc";
-
-                if(nomeCliente != null) 
-                    return View(await _context.Clientes.Where(e => e.NomeCliente.Contains(nomeCliente)).OrderByDescending(e => e.Referencia).ToListAsync());
-                else
-                    return View(await _context.Clientes.OrderByDescending(e => e.Referencia).ToListAsync());
-            default:
-                if(nomeCliente != null) 
-                    return View(await _context.Clientes.Where(e => e.NomeCliente.Contains(nomeCliente)).ToListAsync());
-                else
-                    return View(await _context.Clientes.ToListAsync());
+                ViewData["OrdenarPor"] = "ReferenciaDesc"; 
+                query = query.OrderByDescending(e => e.Referencia);
+                break;
         }
+
+        var clientes = await query.ToListAsync();
+        
+        return View(clientes);
     }
 
     public IActionResult Adicionar()
