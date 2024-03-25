@@ -22,6 +22,7 @@
     <div class="row mt-4">
         <div class="col">
             <h3>Itens do cliente</h3>
+            <hr>
             @if (Model.Items != null)
             {
                 <div class="mb-3">
@@ -37,7 +38,7 @@
                             <th>Item 2</th>
                             <th>Texto</th>
                             <th>Tipo</th>
-                            <th>Ações</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,7 +63,7 @@
                                         }
                                     }
                                 </td>
-                                <td>
+                                <td class="d-flex justify-content-end gap-2">
                                     <a class="btn btn-success" asp-action="Editar" asp-route-id="@item.Id">Editar</a>
                                     <a class="btn btn-danger" asp-action="Eliminar" asp-route-id="@item.Id">Eliminar</a>
                                 </td>

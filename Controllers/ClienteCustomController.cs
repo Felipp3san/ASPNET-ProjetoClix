@@ -15,9 +15,60 @@ public class ClienteCustomController : Controller
         _context = context;
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string ordenarPor, string? nomeCliente)
     {
-        return View(await _context.Clientes.ToListAsync());
+        ViewData["NomeCliente"] = nomeCliente;        
+
+        switch(ordenarPor)
+        {
+            case "Id":
+                ViewBag.ordenarPor = "Id";
+
+                if(nomeCliente != null) 
+                    return View(await _context.Clientes.Where(e => e.NomeCliente.Contains(nomeCliente)).OrderBy(e => e.Id).ToListAsync());
+                else
+                    return View(await _context.Clientes.OrderBy(e => e.Id).ToListAsync());
+            case "IdDesc":
+                ViewBag.ordenarPor = "IdDesc";
+
+                if(nomeCliente != null) 
+                    return View(await _context.Clientes.Where(e => e.NomeCliente.Contains(nomeCliente)).OrderByDescending(e => e.Id).ToListAsync());
+                else
+                    return View(await _context.Clientes.OrderByDescending(e => e.Id).ToListAsync());
+            case "Nome":
+                ViewBag.ordenarPor = "Nome";
+
+                if(nomeCliente != null) 
+                    return View(await _context.Clientes.Where(e => e.NomeCliente.Contains(nomeCliente)).OrderBy(e => e.NomeCliente).ToListAsync());
+                else
+                    return View(await _context.Clientes.OrderBy(e => e.NomeCliente).ToListAsync());
+            case "NomeDesc":
+                ViewBag.ordenarPor = "NomeDesc";
+
+                if(nomeCliente != null) 
+                    return View(await _context.Clientes.Where(e => e.NomeCliente.Contains(nomeCliente)).OrderByDescending(e => e.NomeCliente).ToListAsync());
+                else
+                    return View(await _context.Clientes.OrderByDescending(e => e.NomeCliente).ToListAsync());
+            case "Referencia":
+                ViewBag.ordenarPor = "Referencia";
+
+                if(nomeCliente != null) 
+                    return View(await _context.Clientes.Where(e => e.NomeCliente.Contains(nomeCliente)).OrderBy(e => e.Referencia).ToListAsync());
+                else
+                    return View(await _context.Clientes.OrderBy(e => e.Referencia).ToListAsync());
+            case "ReferenciaDesc":
+                ViewBag.ordenarPor = "ReferenciaDesc";
+
+                if(nomeCliente != null) 
+                    return View(await _context.Clientes.Where(e => e.NomeCliente.Contains(nomeCliente)).OrderByDescending(e => e.Referencia).ToListAsync());
+                else
+                    return View(await _context.Clientes.OrderByDescending(e => e.Referencia).ToListAsync());
+            default:
+                if(nomeCliente != null) 
+                    return View(await _context.Clientes.Where(e => e.NomeCliente.Contains(nomeCliente)).ToListAsync());
+                else
+                    return View(await _context.Clientes.ToListAsync());
+        }
     }
 
     public IActionResult Adicionar()
